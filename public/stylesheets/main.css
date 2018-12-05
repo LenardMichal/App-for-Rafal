@@ -1,0 +1,215 @@
+:root{
+    --color-main: #752a07 ;
+    --color-second: #fbcb7b;
+    --color-third: 185, 217, 195;
+    --color-fourth: #eb5e30;
+}
+@font-face {
+    font-family: fontMulti;
+    src: url('../assets/Muli-Regular.ttf');
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/pexels-photo-1414651.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-width: 320px;
+    font-family: fontMulti;
+}
+#wrapper{
+    margin: 0 auto;
+    position: relative;
+    max-width: 1000px;
+    min-width: 350px;
+    background-color: rgba(var(--color-third),0.9);
+    height: 100%;
+}
+
+.icon{
+    height: 25px;
+    width: 25px;
+    
+   
+   
+    
+    
+}
+#social a{
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    margin: 0;
+}
+#logo img, #logo a{
+    margin: 0 auto 0 0;
+    display: block;
+    width: 80vw;
+    max-width: 400px;
+}
+nav img{
+    width: 8vw;
+    position: relative;
+    left: 0px;
+    top: 5px;
+    margin: 5px;
+    
+    
+}
+
+
+#social{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    
+    
+    
+    
+    
+    
+}
+
+
+#menu{
+    position: absolute;
+   
+
+    
+   
+}
+
+nav ul{
+    list-style-type: none;
+    padding-left: 0;
+    z-index: 1000;
+   
+    
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    border: 1px black solid;
+    background-color: var(--color-fourth);
+    display: block;
+    transition: background-color 1s;
+    
+    padding: 15px
+        
+    
+}
+nav ul li a:hover{
+    background-color: red;
+}
+
+    
+
+
+article{
+    margin: 0 10px;
+    
+    max-width: 450px;
+    text-align: justify;
+    
+}
+@keyframes fadeOut{
+    from {opacity: 0.4;}
+    to {opacity: 1}
+}
+section img{
+    width: 95%;
+    max-width: 450px;
+    border-radius: 5px;
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    margin: 0 auto;
+    display: block;
+    
+
+    
+}
+
+
+
+ .hidden, .fade{
+    display: none;
+}
+
+
+#slideshow-container2{
+    display: none; 
+}
+footer{
+    background-color: darkgrey;
+}
+
+footer p{
+    display: inline;
+}
+/* h1{
+    text-align: center;
+}
+
+div#FirstDiet{
+    background-color: greenyellow;
+    text-align: center;
+    max-width: 490px;
+    margin: 0 auto;
+}
+div#FirstDiet p{
+    text-align: left;
+}
+div#FirstDiet a{
+    position: relative;
+    right: 0;
+    bottom: 0;
+    border: 1px black solid;
+
+
+} */
+
+@media (min-width: 550px) {
+    
+    
+    nav ul li, nav ul li a {
+        display: inline-block;
+        width: 20vw;
+        padding: 10px;
+        max-width: 200px;
+        text-align: center;
+        
+    } 
+      
+    #logo img, #logo a{
+        margin: 0 auto;
+    }
+    
+    #menu{
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    
+        
+    }
+
+    section{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 10px 10px;
+    }   
+    section img{
+        display: inline-block;
+        grid-column: 2/3;
+       
+    }
+    #slideshow-container2{
+        display: inline-block; 
+    }
+}
+
+
+

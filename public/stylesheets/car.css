@@ -1,0 +1,36 @@
+/* Icon made by Freepik from www.flaticon.com */
+
+#car{
+    width: 100px;
+    height: 100px;
+    background-image: url('../assets/car.svg');
+    background-size: cover;
+    position: absolute;
+    animation-name: movingCar;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes movingCar{
+    0% {
+        left: 0;
+        
+    }
+    49% {
+        left: 80%;
+        transform: rotateY(0);
+    }
+    50% {
+        left: 80%;
+        transform: rotateY(180deg);
+    }
+    99%{
+        left: 1%;
+        transform: rotateY(180deg);
+    }
+    100% {
+        left: 0;
+           
+    }
+}
