@@ -9,124 +9,137 @@ let parametr = {
 }
 
 
+//Set of validator function
 
 
-async function validator(obj) {
+function validator(obj) {
   let valid = {};
-  try {
-    await validDiet(obj);
-    await validCal(obj);
-    await validCalendar(obj);
-    await validCity(obj);
-    await validMail(obj);
-    await validName(obj);
-    await validSurname(obj);
-    await validPhone(obj);
-  } catch (error) {
-    console.log(error);
-  }
-  let nonValid = {}
-  nonValid.error = 0;
+
+  valid.dietType = validDiet(obj.type.diet);
+  valid.dietCal = validCal(obj.type.cal);
+  valid.calendar = validCalendar(obj.type.dateRange);
+  valid.city = validCity(obj.delivery.city);
+  valid.email = validMail(obj.personals.email);
+  valid.name = validName(obj.personals.name);
+  valid.surname = validSurname(obj.personals.surname);
+  valid.phone = validPhone(obj.personals.phone);
+
+  valid.error = 0;
   for (let key in valid) {
-    if (valid[key] === false) {
-      nonValid[key] = !valid[key];
-      nonValid.error += 1;
+    if(key == 'error'){
+      break;
+    }
+    if (!valid[key]) {
+      valid[key] = true;
+      valid.error++ ;
+      
+    }else {
+      valid[key] = false;
     }
   }
-  return nonValid
+  
+  return valid
 }
 
 
-function validDiet(obj) {
-  if (typeof (obj.type.diet) != 'undefined' ||
-    obj.type.diet === locale.oferta[0].class ||
-    obj.type.diet === locale.oferta[1].class ||
-    obj.type.diet === locale.oferta[2].class ||
-    obj.type.diet === locale.oferta[3].class) {
+function validDiet(diet) {
+  if (typeof (diet) != 'undefined' &&
+    diet === locale.oferta[0].class ||
+    diet === locale.oferta[1].class ||
+    diet === locale.oferta[2].class ||
+    diet === locale.oferta[3].class) {
 
-    return valid.dietType = true;
+    return true;
   } else {
-    return valid.dietType = false;
+    return false;
   }
 }
 
-function validCal(obj) {
-  if (typeof (obj.type.cal) != 'undefined' ||
-    obj.type.cal === locale.calValue[0] ||
-    obj.type.cal === locale.calValue[1] ||
-    obj.type.cal === locale.calValue[2] ||
-    obj.type.cal === locale.calValue[3]) {
-    return valid.dietCal = true;
+function validCal(cal) {
+  if (typeof (cal) != 'undefined' &&
+    cal == locale.calValue[0] ||
+    cal == locale.calValue[1] ||
+    cal == locale.calValue[2] ||
+    cal == locale.calValue[3]) {
+    return true;
   } else {
-    return valid.dietCal = false;
+    return false;
   }
 }
 
-function validCity(obj) {
-  if (locale.cityList.includes(obj.delivery.city.charAt(0).toUpperCase() + obj.delivery.city.slice(1).toLowerCase())) {
-    return valid.city = true;
+function validCity(city) {
+  if (locale.cityList.includes(city.charAt(0).toUpperCase() + city.slice(1).toLowerCase())) {
+    return true;
   } else {
-    return valid.city = false;
+    return false;
   }
 }
 
-function validCalendar(obj) {
+
+function validCalendar(calendar) {
   let now = new Date();
-  if (!obj.type.dateRange) {
-    valid.calendar = false;
+  if (!calendar) {
+    return false;
   } else {
     let ary = [];
-    let arr = obj.type.dateRange.split(',');
+    let arr = calendar.split(',');
     arr.forEach((data) => {
       let value = data.split('-');
-      let newDay = new Date(Number(value[2]), Number(value[1]) - 1, Number(value[0]) + 1)
+      let newDay = new Date(Number(value[2]), Number(value[1]) - 1, Number(value[0]) + 1);
+
       ary.push(newDay);
     });
 
     ary.every((day) => {
       if (day.getTime() > now.getTime() && day.getDay() !== 0 && day.getDay() !== 6) {
-        valid.calendar = true;
-        return true;
+
+        return check = true;
       } else {
-        valid.calendar = false;
-        return false;
+
+        return check = false;
 
       }
-    })
+
+    });;
+    if (check) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 
-function validName(obj) {
-  if (obj.personals.name.length > 1) {
-    return valid.name = true;
+function validName(name) {
+  if (name.length > 1) {
+    return true;
   } else {
-    return valid.name = false;
+    return false;
   }
 }
 
-function validSurname(obj) {
-  if (obj.personals.surname) {
-    return valid.surname = true;
+function validSurname(surname) {
+  if (surname) {
+    return true;
   } else {
-    return valid.surname = false;
+    return false;
   }
 }
 
-function validPhone(obj) {
+function validPhone(phone) {
   let phoneexp = /[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]/;
-  if (obj.personals.phone.length === 11 && obj.personals.phone.match(phoneexp)) {
-    return valid.phone = true;
+  if (phone.length === 11 && phone.match(phoneexp)) {
+    return true;
   } else {
-    return valid.phone = false
+    return false
   }
 }
 
-function validMail(obj) {
+function validMail(email) {
   let mailexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/img;
-  if (obj.personals.email.match(mailexp)) {
-    return valid.email = true;
+  if (email.match(mailexp)) {
+    return true;
   } else {
-    return valid.email = false;
+    return false;
   }
 }
 
