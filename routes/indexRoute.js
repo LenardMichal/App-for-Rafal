@@ -81,7 +81,7 @@ router.get('/dziekuje', (req, res)=>{
 
 
 router.post('/notify',  (req, res)=>{
-   fs.appendFile('log.txt', req.body.status, (err)=>{});
+   
   MongoClient.connect(url,{ useNewUrlParser: true }, (err, db)=>{
     if (err) throw err;
     let dbo = db.db(sec.dbName);
@@ -97,6 +97,8 @@ router.post('/notify',  (req, res)=>{
 
     })
   })
+
+  
 
   
 
